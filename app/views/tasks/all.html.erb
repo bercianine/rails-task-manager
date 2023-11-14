@@ -13,30 +13,36 @@
         <h2 class="text-center mb-5">🧸 Your tasks</h2>
       </div>
     </div>
-    <div class="row justify-content-center d-flex" style="gap: 16px;">
-      <% @tasks.each do |task| %>
-        <% if task.completed == true %>
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <div class="d-flex" style="gap: 8px;">
-                <input class="form-check-input" type="checkbox" value="" checked>
-                <h5 class="card-title"><%= task.title %></h5>
+    <div class="row justify-content-center">
+      <div class="col-12 justify-content-center d-flex" style="gap: 16px;">
+        <% @tasks.each do |task| %>
+          <% if task.completed == true %>
+            <%= link_to(find_path(id: task.id)) do %>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <div class="d-flex" style="gap: 8px;">
+                    <input class="form-check-input" type="checkbox" value="" checked>
+                    <h5 class="card-title"><%= task.title %></h5>
+                  </div>
+                  <p class="card-text"><%= task.details %></p>
+                </div>
               </div>
-              <p class="card-text"><%= task.details %></p>
-            </div>
-          </div>
-        <% else %>
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <div class="d-flex" style="gap: 8px;">
-                <input class="form-check-input" type="checkbox" value="">
-                <h5 class="card-title"><%= task.title %></h5>
+            <% end  %>
+          <% else %>
+            <%= link_to(find_path(id: task.id)) do %>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <div class="d-flex" style="gap: 8px;">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <h5 class="card-title"><%= task.title %></h5>
+                  </div>
+                  <p class="card-text"><%= task.details %></p>
+                </div>
               </div>
-              <p class="card-text"><%= task.details %></p>
-            </div>
-          </div>
-        <% end  %>
-      <% end %>
+            <% end %>
+          <% end  %>
+        <% end %>
+      </div>
     </div>
   </div>
 </body>
