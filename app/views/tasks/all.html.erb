@@ -13,35 +13,33 @@
         <h2 class="text-center mb-5">🧸 Your tasks</h2>
       </div>
     </div>
+    <% @tasks.each_slice(3) do |task_set| %>
+      <div class="row mb-3">
+        <div class="col-12 justify-content-center d-flex" style="gap: 16px;">
+          <% task_set.each do |task| %>
+              <%= link_to(find_path(id: task.id)) do %>
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <div class="d-flex" style="gap: 8px;">
+                      <% if task.completed %>
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                      <% else %>
+                        <input class="form-check-input" type="checkbox" value="">
+                      <% end %>
+                      <h5 class="card-title"><%= task.title %></h5>
+                    </div>
+                    <p class="card-text"><%= task.details %></p>
+                  </div>
+                </div>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <br>
     <div class="row justify-content-center">
-      <div class="col-12 justify-content-center d-flex" style="gap: 16px;">
-        <% @tasks.each do |task| %>
-          <% if task.completed == true %>
-            <%= link_to(find_path(id: task.id)) do %>
-              <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <div class="d-flex" style="gap: 8px;">
-                    <input class="form-check-input" type="checkbox" value="" checked>
-                    <h5 class="card-title"><%= task.title %></h5>
-                  </div>
-                  <p class="card-text"><%= task.details %></p>
-                </div>
-              </div>
-            <% end  %>
-          <% else %>
-            <%= link_to(find_path(id: task.id)) do %>
-              <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <div class="d-flex" style="gap: 8px;">
-                    <input class="form-check-input" type="checkbox" value="">
-                    <h5 class="card-title"><%= task.title %></h5>
-                  </div>
-                  <p class="card-text"><%= task.details %></p>
-                </div>
-              </div>
-            <% end %>
-          <% end  %>
-        <% end %>
+      <div class="col-12 text-center">
+        <%= link_to "New task", new_path, class: "btn btn-primary mt-3" %>
       </div>
     </div>
   </div>
